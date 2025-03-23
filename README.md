@@ -2,7 +2,7 @@
 
 ## Hardware Design
 
-![alt_text](ESP32-door-sensing-Hardware Design.drawio.png)
+![alt text](ESP32-door-sensing-Hardware-Design.png)
 
 [OPT4003DNPRQ1] https://www.ti.com/lit/gpn/OPT4003-Q1
 
