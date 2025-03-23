@@ -2,5 +2,6 @@
     "C_Cpp.intelliSenseEngine": "default",
     "idf.espIdfPathWin": "C:/Espressif/frameworks/esp-idf-v4.4.2/",
     "idf.toolsPathWin": "C:\\Espressif",
-    "idf.pythonInstallPath": "C:\\Espressif\\tools\\idf-python\\3.8.7\\python.exe"
+    "idf.pythonInstallPath": "C:\\Espressif\\tools\\idf-python\\3.8.7\\python.exe",
+    "C_Cpp.errorSquiggles": "disabled"
 }
