@@ -1,17 +1,12 @@
-# _Sample project_
+# _ESP32 DOOR SENSING_
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+## Hardware Design
 
-This is the simplest buildable example. The example is used by command `idf.py create-project`
-that copies the project to user specified path and set it's name. For more information follow the [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project)
+![alt_text](ESP32-door-sensing-Hardware Design.drawio.png)
 
+[OPT4003DNPRQ1] https://www.ti.com/lit/gpn/OPT4003-Q1
 
-
-## How to use example
-We encourage the users to use the example as a template for the new projects.
-A recommended way is to follow the instructions on a [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project).
-
-## Example folder contents
+## Firmware Architecture
 
 The project **sample_project** contains one source file in C language [main.c](main/main.c). The file is located in folder [main](main).
 
@@ -30,3 +25,25 @@ Below is short explanation of remaining files in the project folder.
 ```
 Additionally, the sample project contains Makefile and component.mk files, used for the legacy Make based build system. 
 They are not used or needed when building with CMake and idf.py.
+
+## Firmware Design
+
+```C++
+
+// Light Sensor
+bool init();
+bool lightTriggered();
+
+// ToF Sensor
+void powerOn();
+void powerOff();
+bool init();
+int getDistance();
+
+// Accelerometer
+void init();
+bool motionDetected();
+
+```
+
+## Program State Chart
