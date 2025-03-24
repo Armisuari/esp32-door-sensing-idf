@@ -1,0 +1,44 @@
+#pragma once
+
+#include <sdkconfig.h>
+
+#ifndef CONFIG_LIS2DW12_LOG_TAG
+#define CONFIG_LIS2DW12_LOG_TAG                    "LIS2DW12"
+#endif /* CONFIG_LIS2DW12_LOG_TAG */
+#define ACCELEROMETER_TAG CONFIG_LIS2DW12_LOG_TAG
+
+#ifndef CONFIG_LIS2DW12_ADDR
+#define CONFIG_LIS2DW12_ADDR                       (0x19)
+#endif /* CONFIG_LIS2DW12_ADDR */
+
+#ifndef CONFIG_LIS2DW12_REG_CTRL1
+#define CONFIG_LIS2DW12_REG_CTRL1                  (0x20)
+#endif /* CONFIG_LIS2DW12_REG_CTRL1 */
+
+#ifndef CONFIG_LIS2DW12_REG_CTRL6
+#define CONFIG_LIS2DW12_REG_CTRL6                  (0x25)
+#endif /* CONFIG_LIS2DW12_REG_CTRL6 */
+
+#ifndef CONFIG_LIS2DW12_REG_WAKE_UP_THS
+#define CONFIG_LIS2DW12_REG_WAKE_UP_THS            (0x34)
+#endif /* CONFIG_LIS2DW12_REG_WAKE_UP_THS */
+
+#ifndef CONFIG_LIS2DW12_REG_WAKE_UP_DUR
+#define CONFIG_LIS2DW12_REG_WAKE_UP_DUR            (0x35)
+#endif /* CONFIG_LIS2DW12_REG_WAKE_UP_DUR */
+
+#ifndef CONFIG_LIS2DW12_REG_CTRL4_INT1
+#define CONFIG_LIS2DW12_REG_CTRL4_INT1             (0x23)
+#endif /* CONFIG_LIS2DW12_REG_CTRL4_INT1 */
+
+#ifndef CONFIG_LIS2DW12_REG_STATUS
+#define CONFIG_LIS2DW12_REG_STATUS                 (0x27)
+#endif /* CONFIG_LIS2DW12_REG_STATUS */
+
+#ifndef CONFIG_LIS2DW12_REG_WAKE_UP_SRC
+#define CONFIG_LIS2DW12_REG_WAKE_UP_SRC            (0x38)
+#endif /* CONFIG_LIS2DW12_REG_WAKE_UP_SRC */
+
+#ifndef CONFIG_I2C_PORT
+#define CONFIG_I2C_PORT                            (I2C_NUM_0)   // I2C port number
+#endif /* CONFIG_I2C_PORT */
