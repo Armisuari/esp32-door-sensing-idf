@@ -2,6 +2,7 @@ set(COMPONENT_SRCS
     "main.cpp"
     "DoorSensingApp.cpp"
     "driver/LightSensor_OPT4003.cpp"
+    "driver/Accelerometer_LIS2DW12.cpp"
 )
 
 set(COMPONENT_ADD_INCLUDEDIRS
