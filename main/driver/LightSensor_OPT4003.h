@@ -11,8 +11,11 @@ class LightSensor_OPT4003 : public LightSensorInterface
 {
     public:
         bool init();
-        bool lightTriggered();
+        bool lightTriggered(const float threshold);
     private:
         esp_err_t writeRegister(uint8_t reg, uint16_t value);
         esp_err_t readRegister(uint8_t reg, uint16_t *value);
+        float readLux(bool isUSON = true);
+
+        OPT4003Config config;
 };

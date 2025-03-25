@@ -11,18 +11,48 @@
 #define CONFIG_OPT4003_ADDR                       (0x44)
 #endif /* CONFIG_OPT4003_ADDR */
 
-#ifndef CONFIG_OPT4003_REG_RESULT
-#define CONFIG_OPT4003_REG_RESULT                 (0x00)
-#endif /* CONFIG_OPT4003_REG_RESULT */
+#ifndef CONFIG_OPT4003_REG_RESULT_MSB_CH0
+#define CONFIG_OPT4003_REG_RESULT_MSB_CH0         (0x00)
+#endif /* CONFIG_OPT4003_REG_RESULT_MSB_CH0 */
+
+#ifndef CONFIG_OPT4003_REG_RESULT_LSB_CH0
+#define CONFIG_OPT4003_REG_RESULT_LSB_CH0         (0x01)
+#endif /* CONFIG_OPT4003_REG_RESULT_LSB_CH0 */
 
 #ifndef CONFIG_OPT4003_REG_CONFIG
-#define CONFIG_OPT4003_REG_CONFIG                 (0x01)
+#define CONFIG_OPT4003_REG_CONFIG                 (0x0A)
 #endif /* CONFIG_OPT4003_REG_CONFIG */
-
-#ifndef CONFIG_OPT4003_CONFIG_START
-#define CONFIG_OPT4003_CONFIG_START               (0xC810)  // Continuous conversion, automatic full-scale
-#endif /* CONFIG_OPT4003_CONFIG_START */
 
 #ifndef CONFIG_OPT4003_I2C_PORT
 #define CONFIG_OPT4003_I2C_PORT                   (I2C_NUM_0)   // I2C port number
 #endif /* CONFIG_OPT4003_I2C_PORT */
+
+class OPT4003Config {
+    public:
+        enum ConversionTime {
+            CT_800US = 0b000,
+            CT_1_6MS = 0b100,
+            CT_3_2MS = 0b101,
+            CT_6_4MS = 0b111
+        };
+    
+        enum RangeSetting {
+            RANGE_AUTO = 0b000,
+            RANGE_1 = 0b001,
+            RANGE_2 = 0b010,
+            RANGE_3 = 0b011
+        };
+    
+        OPT4003Config();
+    
+        OPT4003Config& setReset(bool enable = true);
+        OPT4003Config& setContinuousMode(bool enable = true);
+        OPT4003Config& setConversionTime(ConversionTime ct);
+        OPT4003Config& setAutoRange();
+        OPT4003Config& setRange(RangeSetting range);
+    
+        uint16_t build() const;
+    
+    private:
+        uint16_t configReg;
+};
