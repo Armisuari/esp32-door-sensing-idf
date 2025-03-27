@@ -23,7 +23,7 @@ esp_err_t LightSensor_OPT4003::readRegister(uint8_t reg, uint16_t *value)
     return ret;
 }
 
-bool LightSensor_OPT4003::init()
+bool LightSensor_OPT4003::init(void (*isr_handler)(void *))
 {
     // Initialize sensor
     config = OPT4003Config()
@@ -39,6 +39,17 @@ bool LightSensor_OPT4003::init()
         ESP_LOGE(LIGHT_SENSOR_TAG, "Failed to write configuration register");
         return false;
     }
+
+    gpio_config_t io_conf = {
+        .pin_bit_mask = 1ULL << CONFIG_OPT4003_INT_PIN,
+        .mode = GPIO_MODE_INPUT,
+        .pull_up_en = GPIO_PULLUP_ENABLE,
+        .pull_down_en = GPIO_PULLDOWN_DISABLE,
+        .intr_type = GPIO_INTR_POSEDGE
+    };
+    gpio_config(&io_conf);
+    gpio_install_isr_service(0);
+    gpio_isr_handler_add(CONFIG_OPT4003_INT_PIN, isr_handler, NULL);
 
     return true;
 }

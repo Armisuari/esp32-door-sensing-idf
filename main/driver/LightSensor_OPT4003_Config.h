@@ -27,6 +27,10 @@
 #define CONFIG_OPT4003_I2C_PORT                   (I2C_NUM_0)   // I2C port number
 #endif /* CONFIG_OPT4003_I2C_PORT */
 
+#ifndef CONFIG_OPT4003_INT_PIN
+#define CONFIG_OPT4003_INT_PIN                    (GPIO_NUM_5) // GPIO pin number for interrupt
+#endif /* CONFIG_OPT4003_INT_PIN */
+
 class OPT4003Config {
     public:
         enum ConversionTime {
