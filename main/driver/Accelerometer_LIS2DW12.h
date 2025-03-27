@@ -10,7 +10,7 @@
 class Accelerometer_LIS2DW12 : public AccelerometerInterface
 {
     public:
-        void init();
+        void init(void (*isr_handler)(void *) = nullptr);
         bool motionDetected();
     private:
         esp_err_t writeRegister(uint8_t reg, uint8_t value);

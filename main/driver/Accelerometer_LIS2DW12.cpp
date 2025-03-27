@@ -14,7 +14,7 @@ esp_err_t Accelerometer_LIS2DW12::readRegister(uint8_t reg, uint8_t *value, size
     return i2c_master_write_read_device(CONFIG_I2C_PORT, config_.getDeviceAddress(), &reg, 1, value, len, pdMS_TO_TICKS(100));
 }
 
-void Accelerometer_LIS2DW12::init()
+void Accelerometer_LIS2DW12::init(void (*isr_handler)(void *))
 {
     // Initialize sensor
     ESP_LOGI(ACCELEROMETER_TAG, "Initializing LIS2DW12");
@@ -22,6 +22,17 @@ void Accelerometer_LIS2DW12::init()
 
     checkDeviceID();
     configureSensor();
+
+    gpio_config_t io_conf = {
+        .pin_bit_mask = 1ULL << CONFIG_LIS2DW12_INT_PIN,
+        .mode = GPIO_MODE_INPUT,
+        .pull_up_en = GPIO_PULLUP_ENABLE,
+        .pull_down_en = GPIO_PULLDOWN_DISABLE,
+        .intr_type = GPIO_INTR_NEGEDGE
+    };
+    gpio_config(&io_conf);
+    gpio_install_isr_service(0);
+    gpio_isr_handler_add(CONFIG_LIS2DW12_INT_PIN , isr_handler, NULL);
 }
 
 bool Accelerometer_LIS2DW12::motionDetected()

@@ -3,6 +3,6 @@
 class AccelerometerInterface
 {
     public:
-        virtual void init() = 0;
+        virtual void init(void (*isr_handler)(void *)) = 0;
         virtual bool motionDetected() = 0;
 };
