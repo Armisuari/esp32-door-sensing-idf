@@ -5,8 +5,8 @@
 
 static const char *TAG = "DoorSensingApp";
 
-DoorSensingApp::DoorSensingApp(LightSensorInterface &lightSensor, AccelerometerInterface &accelerometer) :
-_lightSensor(lightSensor), _accelerometer(accelerometer)
+DoorSensingApp::DoorSensingApp(LightSensorInterface &lightSensor, AccelerometerInterface &accelerometer, ToFSensorInterface &tofSensor) :
+_lightSensor(lightSensor), _accelerometer(accelerometer), _tofSensor(tofSensor)
 {
 }
 
@@ -20,6 +20,13 @@ void DoorSensingApp::init()
 
     // Initialize the accelerometer
     _accelerometer.init();
+
+    // Initialize the ToF sensor
+    _tofSensor.powerOn();
+    if (!_tofSensor.init())
+    {
+        ESP_LOGE(TAG, "Failed to initialize ToF sensor");
+    }
 }
 
 void DoorSensingApp::run()
@@ -29,6 +36,7 @@ void DoorSensingApp::run()
     {
         checkLightSensor();
         checkAccelerometer();
+        checkToFSensor();
 
         // Delay for 1 second
         vTaskDelay(pdMS_TO_TICKS(1000));
@@ -37,7 +45,7 @@ void DoorSensingApp::run()
 
 void DoorSensingApp::checkLightSensor()
 {
-    if (_lightSensor.lightTriggered())
+    if (_lightSensor.lightTriggered(100))
     {
         ESP_LOGI(TAG, "Light is triggered");
     }
@@ -56,5 +64,17 @@ void DoorSensingApp::checkAccelerometer()
     else
     {
         ESP_LOGI(TAG, "Motion is not detected");
+    }
+}
+
+void DoorSensingApp::checkToFSensor()
+{
+    if (_tofSensor.getDistance() < 100)
+    {
+        ESP_LOGI(TAG, "Object is detected");
+    }
+    else
+    {
+        ESP_LOGI(TAG, "Object is not detected");
     }
 }

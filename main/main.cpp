@@ -11,6 +11,7 @@
 #include "DoorSensingApp.h"
 #include "LightSensor_OPT4003.h"
 #include "Accelerometer_LIS2DW12.h"
+#include "ToFSensor_VL53L3CX.h"
 
 static const char *TAG = "main";
 
@@ -38,9 +39,10 @@ esp_err_t i2c_master_init(void)
 
 LightSensor_OPT4003 lightSensor;
 Accelerometer_LIS2DW12 accelerometer;
+ToFSensor_VL53L3CX tofSensor;
 
 // Door sensing application
-DoorSensingApp doorSensingApp(lightSensor, accelerometer);
+DoorSensingApp doorSensingApp(lightSensor, accelerometer, tofSensor);
 
 extern "C" void app_main()
 {
