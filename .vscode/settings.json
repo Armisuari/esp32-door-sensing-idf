@@ -3,5 +3,12 @@
     "idf.espIdfPathWin": "C:/Espressif/frameworks/esp-idf-v4.4.2/",
     "idf.toolsPathWin": "C:\\Espressif",
     "idf.pythonInstallPath": "C:\\Espressif\\tools\\idf-python\\3.8.7\\python.exe",
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "disabled",
+    "files.associations": {
+        "*.ipp": "cpp",
+        "string.h": "c",
+        "vl53lx_platform.h": "c",
+        "vl53lx_platform_log.h": "c",
+        "vl53lx_def.h": "c"
+    }
 }
